@@ -13,6 +13,6 @@ Embedded application to control temperature and take action according to the tem
 - A feedback from the sensor with the new current temperature will help the system to take another appropriate control action.
 - Depending on this closed loop concept with continuous feedback, the system will saturate by reaching desired temperature.
 - A security system is added to our project:
-        - when the current temperature of the surrounding is in predefined limits, A green led is lighting up indicating that everything is normal
-        - when the current temperature exceeds a predefined critical point, A warning message will pop up on the LCD, The green led will be turned off, A red led will start blinking.
-        - After ten seconds, A buzzer will launch, The red led will stop blinking.
+-         when the current temperature of the surrounding is in predefined limits, A green led is lighting up indicating that everything is normal
+-         when the current temperature exceeds a predefined critical point, A warning message will pop up on the LCD, The green led will be turned off, A red led will start blinking.
+-         After ten seconds, A buzzer will launch, The red led will stop blinking.
