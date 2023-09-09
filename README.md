@@ -16,3 +16,10 @@ Embedded application to control temperature and take action according to the tem
 - when the current temperature of the surrounding is in predefined limits, A green led is lighting up indicating that everything is normal
 - when the current temperature exceeds a predefined critical point, A warning message will pop up on the LCD, The green led will be turned off, A red led will start blinking.
 - After ten seconds, A buzzer will launch, The red led will stop blinking.
+
+## Simulation video
+https://drive.google.com/drive/folders/1eRGS9WcVQgrbQ4H6wzdKuNHEjQGajG23
+
+## Presentation document
+https://drive.google.com/drive/folders/1BO9D0CEsJc-a6H4HP6-m15LSxWGr7-Jg
+
