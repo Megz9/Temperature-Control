@@ -182,3 +182,52 @@ void EXTI_ISR(void){
 		UART_Close();
 	}
 }
+
+void TIMER2_ISR(void){
+	static u16 counter = 0;
+	static u8 failureCounter = 9; //reset counter
+
+	counter++;
+	if(counter == 1000){ //1sec
+		printCurrentTemp();
+		//if system returns to normal mode automatically
+		if(ADC_currentTemp <= UPPER_LIMIT){
+			CLCD_voidClearRow(2);
+			CLCD_voidMoveCursor(2, 1);
+			CLCD_voidSendString("Desired: ");
+			itoa(desiredTemp, buf,10);
+			CLCD_voidSendString(buf);
+			RedLedOFF();
+			GreenLedON();
+			failureCounter = 9;
+			TIMER2_Disable();
+		}else{
+			RedLedBlink();
+			CLCD_voidClearCell(2,15);
+			CLCD_voidMoveCursor(2, 14);
+			CLCD_voidSendData((failureCounter--)+'0');
+		}
+
+		counter=0;
+	}
+	if(failureCounter == 0){
+		_delay_ms(500);
+		CLCD_voidClearCell(2,15);
+		CLCD_voidMoveCursor(2, 14);
+		CLCD_voidSendData((failureCounter)+'0');
+		failureCounter = 9;
+		counter = 0;
+		openBuzzer();
+		RedLedON();
+		_delay_ms(2000);
+		closeBuzzer();
+		RedLedOFF();
+		CLCD_voidClearLCD();
+		_delay_ms(5000);
+		// Trigger a software reset
+	    MCUCR = (1 << SE) | (1 << SM1) | (1 << SM0);
+	    asm volatile ("jmp 0");
+
+	}
+
+}
