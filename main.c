@@ -74,6 +74,25 @@ void main(){
 	}
 }
 
+void printCurrentTemp(void){
+	ADC_currentTemp = ADC_Read(0);              //take sensor readings
+	ADC_currentTemp = getTemp(ADC_currentTemp);//get temperature equivalent
+	itoa(ADC_currentTemp, buf,10);            //store temp in a string to be printed on the LCD
+	CLCD_voidClearRow(1);
+	CLCD_voidMoveCursor(1, 7);
+	CLCD_voidSendString(buf);
+}
+
+void systemFailure(void){
+	TIMER2_Init();
+
+	GreenLedOFF();        //system goes out from the normal mode
+	CLCD_voidClearRow(2); //prepare LCD to alert warning
+	CLCD_voidMoveCursor(2, 1);
+	CLCD_voidSendString("WARNING! ");
+}
+
+
 void main_Function(void){
 	u8 ADC_prevTemp = ADC_currentTemp; //record last temperature
 	/*take new readings*/
